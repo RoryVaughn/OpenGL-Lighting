@@ -265,6 +265,9 @@ void LightingSphereApplication::generateSphere(unsigned int segments, unsigned i
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(AIEVertex), 0);
 
+	// color
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(AIEVertex), (void*)(sizeof(vec4)));
 	// normals
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 4, GL_FLOAT, GL_TRUE, sizeof(AIEVertex), (void*)(sizeof(vec4)*2));
