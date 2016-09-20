@@ -6,13 +6,13 @@ in vec4 vNormal;
 
 out vec4 color;
 
-uniform vec3 lightDirection;
 uniform vec3 Ka;
 uniform vec3 Kd;
 uniform vec3 Ks;
 uniform vec3 Ia;
 uniform vec3 Id;
 uniform vec3 Is;
+uniform vec3 lightDirection;
 uniform vec3 cameraPosition;
 uniform float specularPower;
 
@@ -20,7 +20,7 @@ void main()
 {
 	vec3 Lm = normalize(lightDirection);
 	vec3 N = normalize(vNormal.xyz);
-	vec3 Rm = (2 * dot(Lm,N)) * N - Lm;
+	vec3 Rm = 2 * dot(Lm,N) * N - Lm;
 	vec3 V = normalize(cameraPosition-vPosition.xyz);
 
     vec3 red = vec3(250,0,0);
@@ -33,11 +33,9 @@ void main()
     float specularTerm = pow( max( 0, dot( Rm, V ) ), specularPower );
 	float lambertTerm = max(0,dot(N,Lm));
 
-    //the Intensity is too high in program...
-    //just scale it here
-    vec3 ambient = (Ia * .01f) * (Ka) * hemisphere;
-	vec3 diffuse = Kd * lambertTerm * Id;
+    vec3 ambient = (Ia * .1f) * (Ka) * hemisphere;
+	vec3 diffuse = Kd * 0.5 * lambertTerm * Id;
     vec3 specular = Is * Ks * specularTerm;
 
-color = vec4(ambient + diffuse + specular,1.0f);
+	color = vec4((0.3 * ambient) + (  diffuse) + specular,1.0f);
 }
