@@ -37,5 +37,5 @@ void main()
 	vec3 diffuse = Kd * 0.5 * lambertTerm * Id;
     vec3 specular = Is * Ks * specularTerm;
 
-	color = vec4((0.3 * ambient) + (  diffuse) + specular,1.0f);
+	color = vec4((0.8 * ambient) + (diffuse) + specular,1.0f);
 }
